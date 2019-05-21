@@ -5,12 +5,20 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server/index.js",
+    "start": "babel-node src/server/index.js",
+    "pm":"pm2 start -i max npm -- start ",
+    "dev": "nodemon --exec babel-node src/server/index.js",
     "webpack": "webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "pm2":"3.5.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
@@ -21,10 +29,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
-    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "webpack": "^4.31.0",
