@@ -1,11 +1,9 @@
 import authRouter from "./auth";
-import userRouter from "./user";
 import { Router } from 'express';
 
 const apiRouter = Router();
 
 apiRouter.use(authRouter);
-apiRouter.use('/user',userRouter)
 
 apiRouter.use((req, res, next)=>{
   console.log(err);

@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/server/index.js",
+    "start": "npm-run-all --parallel  start:client start:server",
+    "start:server": "babel-node src/server/index.js",
+    "start:client": "webpack --mode development --watch",
     "pm":"pm2 start -i max npm -- start ",
     "dev": "nodemon --exec babel-node src/server/index.js",
     "webpack": "webpack"

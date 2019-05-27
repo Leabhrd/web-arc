@@ -1,9 +1,6 @@
 import React from "react";
 import ReactDom from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css'
+import Login from './components/Login'
 
-const title = 'My Minimal React Webpack Babel Setup';
-
-ReactDOM.render(
-  <div>{title}</div>,
-  document.getElementById('root')
-);
+ReactDom.render(<Login />,document.getElementById('root'));
