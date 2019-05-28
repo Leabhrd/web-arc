@@ -15,9 +15,14 @@ app.use(bodyParser.json());
 app.use(morgan('dev'))
 require('dotenv').config();
 const config = require('../../config')
+const mongoose = require('mongoose');
+const dbConnection = mongoose.connect(config.DB_URL, {useNewUrlParser: true});
 
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
 app.use(session({ 
   secret: '123456', 
   cookie: { maxAge: process.env.SESSION_LIFE_TIME || 1000 * 60 * 60 },

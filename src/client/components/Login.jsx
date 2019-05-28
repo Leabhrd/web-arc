@@ -11,7 +11,7 @@ class Login extends React.Component {
     }
   }
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({[event.target.name]: event.target.value});
   }
   render() {
     return (
@@ -19,21 +19,21 @@ class Login extends React.Component {
         <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email"  value={this.state.email} onChange={this.handleChange.bind(this)}/>
+            <Form.Control name="email" type="email" placeholder="Enter email"  value={this.state.email} onChange={this.handleChange.bind(this)}/>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} />
+            <Form.Control name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} />
           </Form.Group>
-          <Button variant="primary" type="button" onClick={this.btnLoginClicked}>Login</Button>
+          <Button variant="primary" type="button" onClick={this.btnLoginClicked.bind(this)}>Login</Button>
         </Form>
       </div>
     );
   }
   btnLoginClicked() {
-    const email = 'hongly@slash.co';
-    const password = '123';
-    axios.post('/api/v1/login', {
+    const email = this.state.email;
+    const password = this.state.password;
+    axios.post('http:/localhost:8000/api/v1/login', {
       email: email,
       password: password
     })

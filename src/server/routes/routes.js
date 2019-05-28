@@ -15,8 +15,8 @@ router.group('/api/v1', (subRouter) => {
 
   //========= User =========
   subRouter.group('/user', (userRoute) => {
-    userRoute.use(authUser);
-    userRoute.get('/me', user.me);
+    userRoute.get('/me',authUser, user.me);
+    userRoute.post("/",user.creatUser);
   });
 
   subRouter.use((req, res, next)=>{

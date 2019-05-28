@@ -5,6 +5,7 @@ module.exports = {
   devtool: 'eval',
   entry: './src/client/index.js',
   output: {
+    library: 'web',
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
