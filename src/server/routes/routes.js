@@ -6,8 +6,7 @@ import user from '../controllers/UserController'
 import authUser from '../middlewares/authUser'
 
 //render view
-router.get("/", authUser, home.index);
-
+router.get("/", home.index);
 
 //API Route
 router.group('/api/v1', (subRouter) => {
@@ -18,6 +17,20 @@ router.group('/api/v1', (subRouter) => {
   subRouter.group('/user', (userRoute) => {
     userRoute.use(authUser);
     userRoute.get('/me', user.me);
+  });
+
+  subRouter.use((req, res, next)=>{
+    res.status(404).send({
+      message: 'Not found',
+      code: 404,
+    });
+  })
+  
+  subRouter.use((err, req, res, next)=>{
+    res.status(500).send({
+      message: 'Internal Server Error',
+      code: 500,
+    });
   });
 });
 
