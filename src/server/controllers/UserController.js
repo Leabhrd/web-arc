@@ -6,6 +6,8 @@ module.exports = {
       const user = await userModel.findOne({_id:userId});
       
       if(!user) throw new Error('Not found');
+
+      user.password = undefined;
       res.send({
         data:user,
         status: true,

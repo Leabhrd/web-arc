@@ -1,5 +1,6 @@
 // var users = [{ id:1 , email: 'hongly@slash.co', password: '123' }];
 const userModel = require("../models/user")
+const bcrypt = require("bcrypt")
 
 module.exports = {
   async login(req, res) {
@@ -7,9 +8,9 @@ module.exports = {
       const { email, password } = req.body;
       if (email && password) {
         // const user = users.find(user => user.email === email && user.password === password);
-        const user = await userModel.findOne({email, password});
-        
-        if (user) {
+        const user = await userModel.findOne({email});
+        const isPasswordCorrect = bcrypt.compareSync(password, user.password);
+        if (user && isPasswordCorrect) {
           req.session.credential = {
             isAuthenticated: true,
             userId: user._id,

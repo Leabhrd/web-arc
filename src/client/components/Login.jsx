@@ -39,9 +39,11 @@ class Login extends React.Component {
     })
     .then(function (response) {
       console.log(response.data);
+      alert("login success");
     })
     .catch(function (error) {
       console.log(error);
+      alert("login failed");
     });
 
   }
