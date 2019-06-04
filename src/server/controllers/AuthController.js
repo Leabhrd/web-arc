@@ -2,6 +2,7 @@
 const userModel = require("../models/user")
 const bcrypt = require("bcrypt")
 
+import JWTUtils  from '../utils/JWTUtils'; 
 module.exports = {
   async login(req, res) {
     try {
@@ -15,8 +16,11 @@ module.exports = {
             isAuthenticated: true,
             userId: user._id,
           }
+          console.log(user);
+          
           res.send({
             status: true,
+            token: JWTUtils.sign(user._id),
             message: 'Login successfully',
           });
         } else {
@@ -27,6 +31,8 @@ module.exports = {
         }
       } 
     } catch (error) {
+      console.log(error);
+      
       res.status(400).send(error);
     }
   },

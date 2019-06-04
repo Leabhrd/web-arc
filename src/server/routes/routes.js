@@ -4,6 +4,7 @@ import home from '../controllers/HomeController'
 import auth from '../controllers/AuthController'
 import user from '../controllers/UserController'
 import authUser from '../middlewares/authUser'
+import authJWT from '../middlewares/authJWT'
 
 //render view
 router.get("/", home.index);
@@ -15,7 +16,7 @@ router.group('/api/v1', (subRouter) => {
 
   //========= User =========
   subRouter.group('/user', (userRoute) => {
-    userRoute.get('/me',authUser, user.me);
+    userRoute.get('/me',authJWT, user.me);
     userRoute.post("/",user.creatUser);
   });
 
@@ -27,6 +28,8 @@ router.group('/api/v1', (subRouter) => {
   })
   
   subRouter.use((err, req, res, next)=>{
+    console.log(err);
+    
     res.status(500).send({
       message: 'Internal Server Error',
       code: 500,

@@ -3,6 +3,8 @@ module.exports = {
   async me(req, res) {
     try {
       const userId = req.body.userId;
+      console.log(userId);
+      
       const user = await userModel.findOne({_id:userId});
       
       if(!user) throw new Error('Not found');

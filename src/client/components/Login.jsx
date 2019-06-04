@@ -26,6 +26,7 @@ class Login extends React.Component {
             <Form.Control name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} />
           </Form.Group>
           <Button variant="primary" type="button" onClick={this.btnLoginClicked.bind(this)}>Login</Button>
+          <Button variant="primary" type="button" onClick={this.getMe.bind(this)}>Get me</Button>
         </Form>
       </div>
     );
@@ -33,19 +34,34 @@ class Login extends React.Component {
   btnLoginClicked() {
     const email = this.state.email;
     const password = this.state.password;
-    axios.post('http:/localhost:8000/api/v1/login', {
+    axios.post('http://localhost:8000/api/v1/login', {
       email: email,
       password: password
     })
-    .then(function (response) {
-      console.log(response.data);
-      alert("login success");
-    })
+    .then((res =>{
+      this.setState({token: res.data.token })
+      return res;
+    }))
+    .then(this.props.onLoginSuccess)
     .catch(function (error) {
       console.log(error);
       alert("login failed");
     });
 
+  }
+
+  getMe(){
+    axios({
+      url:'http://localhost:8000/api/v1/user/me',
+      headers:{
+        'authorization':`Bearer ${this.state.token}`} 
+      })
+    .then(res=>{
+      alert(res.data.data.username);
+    })
+    .catch(err=>{
+      alert('You are not login');
+    })
   }
 }
 

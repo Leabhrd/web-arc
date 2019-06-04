@@ -24,6 +24,7 @@ app.use(cors({
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }));
 app.use(session({ 
+  name:'WebArchSSO',
   secret: '123456', 
   cookie: { maxAge: process.env.SESSION_LIFE_TIME || 1000 * 60 * 60 },
   resave: false,
