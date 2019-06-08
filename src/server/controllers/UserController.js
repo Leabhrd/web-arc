@@ -1,18 +1,32 @@
-const controller =  {
-  getUserById: (req, res) =>{
-    
-  },
-  getUsers: (req, res) =>{
+const userModel = require("../models/user");
+module.exports = {
+  async me(req, res) {
+    try {
+      const userId = req.body.userId;
+      console.log(userId);
+      
+      const user = await userModel.findOne({_id:userId});
+      
+      if(!user) throw new Error('Not found');
 
+      user.password = undefined;
+      res.send({
+        data:user,
+        status: true,
+        message: 'success',
+      });
+    } catch (error) {
+      res.status(400).send(error);
+    }
   },
-  updateById: (req, res) =>{
-
-  },
-  createUser: (req, res) =>{
-
-  },
-
+  async creatUser(req, res){
+    try {
+      const { username, password, email} = req.body;
+      
+      const user = new userModel({username, password, email});
+      res.send(await user.save());
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
 };
-
-
-export default controller;

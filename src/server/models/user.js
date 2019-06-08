@@ -10,8 +10,10 @@ const userSchema = new Schema({
   refreshToken: String,
 })
 
-userSchema.pre('save', ()=>{
+userSchema.pre('save', function() {
   const user = this;
+  const salt = bcrypt.genSaltSync(10);
+  user.password = bcrypt.hashSync(user.password, salt);
 })
 
 module.exports = mongoose.model('User', userSchema);

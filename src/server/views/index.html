@@ -4,8 +4,19 @@
 </head>
 <body>
 {% block content %} 
-<div id="root">{{title}}</div>
+
+<h1>Welcome to Web Architecture Single Sign On</h1>
+<div id="root"></div>
 {% endblock %}
 <script src="main.js"></script>
+<script>
+    web.renderLogin({
+        id: 'root',
+        onLoginSuccess : (response)=>{
+            console.log(response.data);
+            alert("login success");
+        }
+    });
+</script>
 </body>
 </html>
