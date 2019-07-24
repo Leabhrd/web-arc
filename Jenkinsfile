@@ -9,17 +9,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "docker build -t ${NEXUS}web-arc ."
+              sh 'echo ${NEXUS}web-arc .'
+                sh 'docker build -t ${NEXUS}web-arc .'
             }
         }
         stage('Push') {
             steps {
-                sh "docker push -t ${NEXUS}web-arc ."
+                sh 'docker push -t ${NEXUS}web-arc .''
             }
         }
         stage('Deliver') { 
             steps {
-                sh "ssh -t root@${WEB_SERVER} ${SCRIPT}"
+                sh 'ssh -t root@${WEB_SERVER} ${SCRIPT}'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)' 
             }
         }
