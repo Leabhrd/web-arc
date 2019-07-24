@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment { 
         WEB_SERVER = "35.189.153.174"
         SCRIPT = "/home/svengleab_student/script/start.sh"
