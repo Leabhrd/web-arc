@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh 'docker push -t ${NEXUS}web-arc .''
+                sh 'docker push -t ${NEXUS}web-arc .'
             }
         }
         stage('Deliver') { 
