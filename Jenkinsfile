@@ -1,10 +1,10 @@
 pipeline {
     agent none
     environment { 
-        WEB_SERVER="35.189.153.174"
-        SCRIPT="/home/svengleab_student/script/start.sh"
-        NEXUS="35.194.155.218:8082/repository/devops/"
-        IMAGE_NAME="web-arc"
+        WEB_SERVER = "35.189.153.174"
+        SCRIPT = "/home/svengleab_student/script/start.sh"
+        NEXUS = "35.194.155.218:8082/repository/devops/"
+        IMAGE_NAME = "web-arc"
     }
     stages {
         stage('Build') {
